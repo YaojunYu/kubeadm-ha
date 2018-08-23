@@ -19,3 +19,5 @@ for NODE in ${NODES}; do
   scp /etc/kubernetes/pki/etcd/ca.key ${NODE}:/etc/kubernetes/pki/etcd/ca.key
   scp /etc/kubernetes/admin.conf ${NODE}:/etc/kubernetes/admin.conf
 done
+
+sh kubeadm-ha.sh
