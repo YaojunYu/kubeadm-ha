@@ -9,6 +9,7 @@ echo "===copy certs to other masters==="
 : ${NODES:="k8s-m2 k8s-m3"}
 for NODE in ${NODES}; do
   echo "---${NODE}---"
+  ssh ${NODE} "mkdir -p /etc/kubernetes/pki/etcd/"
   scp /etc/kubernetes/pki/ca.crt ${NODE}:/etc/kubernetes/pki/ca.crt
   scp /etc/kubernetes/pki/ca.key ${NODE}:/etc/kubernetes/pki/ca.key
   scp /etc/kubernetes/pki/sa.key ${NODE}:/etc/kubernetes/pki/sa.key
