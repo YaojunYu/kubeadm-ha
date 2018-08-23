@@ -1,7 +1,5 @@
 #!/bin/sh
-#
-# Program: Generate kubernetes static pod files.
-# History: 2018/07/07 k2r2.bai release.
+# auther: york
 
 set -eu
 
