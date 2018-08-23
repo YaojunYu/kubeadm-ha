@@ -14,7 +14,7 @@ spec:
         node-role.kubernetes.io/master: ""
       containers:
         - name: prometheus
-          image: devops-reg.io/public/prometheus:v2.3.1
+          image: prom/prometheus:v2.3.1
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"

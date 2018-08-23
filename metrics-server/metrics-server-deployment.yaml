@@ -34,7 +34,7 @@ spec:
       serviceAccountName: metrics-server
       containers:
       - name: metrics-server
-        image: devops-reg.io/k8s/metrics-server-amd64:v0.2.1
+        image: k8s.gcr.io/metrics-server-amd64:v0.2.1
         imagePullPolicy: IfNotPresent
         command:
         - /metrics-server
