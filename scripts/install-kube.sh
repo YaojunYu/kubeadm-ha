@@ -19,12 +19,8 @@ EOF
 for NODE in ${NODES}; do
   echo "---${NODE}---"
   scp /etc/yum.repos.d/kubernetes.repo ${NODE}:/etc/yum.repos.d/kubernetes.repo
-  ssh ${NODE} "yum update -y"
   ssh ${NODE} "yum install -y docker-ce"
-  ssh ${NODE} "systemctl daemon-reload"
-  ssh ${NODE} "systemctl enable docker && systemctl start docker"
-  ssh ${NODE} "yum install -y kubeadm"
-  ssh ${NODE} "yum install -y kubelet"
-  ssh ${NODE} "yum install -y kubectl"
-  ssh ${NODE} "systemctl enable kubelet"
+  ssh ${NODE} "systemctl daemon-reload && systemctl enable docker && systemctl start docker"
+  ssh ${NODE} "yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes"
+  ssh ${NODE} "systemctl daemon-reload && systemctl enable kubelet && systemctl start kubelet"
 done
