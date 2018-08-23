@@ -3,7 +3,10 @@
 
 set -eu
 
-mkdir "/root/.kubeadm"
+if [ ! -d "/root/.kubeadm" ]; then
+  mkdir "/root/.kubeadm"
+fi
+
 cat <<EOF > /root/.kubeadm/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
