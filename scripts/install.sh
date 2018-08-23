@@ -25,4 +25,8 @@ echo "===install keepalived==="
 export NODES="k8s-m1 k8s-m2 k8s-m3"
 sh install-keepalived.sh
 
+echo ""
+echo "===kubeadm set up==="
+sh kubeadm-up.sh
+
 
