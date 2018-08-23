@@ -21,7 +21,8 @@ for NODE in ${NODES}; do
   scp /etc/kubernetes/admin.conf ${NODE}:/etc/kubernetes/admin.conf
 done
 
-sleep 30
+echo "===sleep 120s wait pod etc-k8s-m1 up==="
+sleep 120
 
 echo "===install other masters==="
 sh kubeadm-ha.sh
