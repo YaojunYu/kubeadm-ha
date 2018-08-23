@@ -429,13 +429,14 @@ $ systemctl enable keepalived && systemctl restart keepalived
 ```
 
 # 所有master节点执行
+```
 kubeadm reset
-
 mkdir -p /etc/kubernetes/pki/etcd/
+```
 
 
 # k8s-master01
-cat << EOF > /root/kubeadm-config.yaml
+```cat << EOF > /root/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
 kubernetesVersion: v1.11.1
@@ -473,6 +474,7 @@ kubeadm init --config kubeadm-config.yaml
 
 ```
 输出：
+```
 # kubeadm join 192.168.60.72:6443 --token dt48lp.j448b22z81l3kut2 --discovery-token-ca-cert-hash sha256:d50efdf5f5dbe45f35209c56cc5fbea52aecc82a3384d1c2c12c0193958769a5
 ```
 
@@ -486,6 +488,7 @@ kubectl get pods --all-namespaces -o wide -w
 ```
 
 # 在k8s-master01上把证书复制到其他master
+```
 CONTROL_PLANE_IPS="k8s-master02 k8s-master03"
 for host in ${CONTROL_PLANE_IPS}; do
   scp /etc/kubernetes/pki/ca.crt $host:/etc/kubernetes/pki/ca.crt
@@ -498,9 +501,10 @@ for host in ${CONTROL_PLANE_IPS}; do
   scp /etc/kubernetes/pki/etcd/ca.key $host:/etc/kubernetes/pki/etcd/ca.key
   scp /etc/kubernetes/admin.conf $host:/etc/kubernetes/admin.conf
 done
-
+```
 
 # k8s-master02
+```
 cat << EOF > /root/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
@@ -558,10 +562,10 @@ kubeadm alpha phase controlplane all --config kubeadm-config.yaml
 kubeadm alpha phase mark-master --config kubeadm-config.yaml
 
 sed -i "s/192.168.60.72:6443/192.168.60.77:6443/g" /etc/kubernetes/admin.conf
-
+```
 
 # k8s-master03
-
+```
 cat << EOF > /root/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
@@ -619,28 +623,34 @@ kubeadm alpha phase controlplane all --config kubeadm-config.yaml
 kubeadm alpha phase mark-master --config kubeadm-config.yaml
 
 sed -i "s/192.168.60.72:6443/192.168.60.78:6443/g" /etc/kubernetes/admin.conf
-
+```
 # 在所有master上允许istio的自动注入
+```
 vi /etc/kubernetes/manifests/kube-apiserver.yaml
     - --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota
 
 systemctl restart kubelet
-
+```
 # 在k8s-master01上允许master上部署pod
+```
 kubectl taint nodes --all node-role.kubernetes.io/master-
-
+```
 # 在k8s-master01上安装calico
+```
 kubectl apply -f calico/
-
+```
 # 在k8s-master01上安装metrics-server
+```
 kubectl apply -f metrics-server/
-
+```
 # 在k8s-master01上安装heapster
+```
 kubectl apply -f heapster/
-
+```
 # 在k8s-master01上安装dashboard
+```
 kubectl apply -f dashboard/
-
+```
 # 在k8s-master01上后去dashboard的登录token
 ```
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
@@ -841,4 +851,16 @@ kubectl get hpa -w
 
 # 删除测试数据
 kubectl delete deploy,svc,hpa nginx-server
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
 ```
