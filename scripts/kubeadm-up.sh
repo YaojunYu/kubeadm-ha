@@ -21,6 +21,9 @@ for NODE in ${NODES}; do
   scp /etc/kubernetes/admin.conf ${NODE}:/etc/kubernetes/admin.conf
 done
 
+sleep 30
+
+echo "===install other masters==="
 sh kubeadm-ha.sh
 
 kubectl taint nodes --all node-role.kubernetes.io/master-
