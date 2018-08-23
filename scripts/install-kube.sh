@@ -23,6 +23,8 @@ for NODE in ${NODES}; do
   ssh ${NODE} "yum install -y docker-ce"
   ssh ${NODE} "systemctl daemon-reload"
   ssh ${NODE} "systemctl enable docker && systemctl start docker"
-  ssh ${NODE} "yum install -y kubelet kubeadm kubectl"
+  ssh ${NODE} "yum install -y kubeadm"
+  ssh ${NODE} "yum install -y kubelet"
+  ssh ${NODE} "yum install -y kubectl"
   ssh ${NODE} "systemctl enable kubelet"
 done
