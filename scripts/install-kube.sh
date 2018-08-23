@@ -20,7 +20,9 @@ for NODE in ${NODES}; do
   echo "---${NODE}---"
   scp /etc/yum.repos.d/kubernetes.repo ${NODE}:/etc/yum.repos.d/kubernetes.repo
   ssh ${NODE} "yum update -y"
-  ssh ${NODE} "yum install -y kubelet kubeadm kubectl"
-  ssh ${NODE} "systemctl daemon-reload && systemctl enable kubelet && systemctl start kubelet"
+  ssh ${NODE} "yum install -y kubelet kubeadm kubectl docker-ce"
+  ssh ${NODE} "systemctl daemon-reload"
+  ssh ${NODE} "systemctl enable docker && systemctl start docker"
+  ssh ${NODE} "systemctl enable kubelet && systemctl start kubelet"
   ssh ${NODE} "systemctl status kubelet"
 done

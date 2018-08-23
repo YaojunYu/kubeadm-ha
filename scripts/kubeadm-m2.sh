@@ -5,6 +5,7 @@ set -eu
 
 : ${K8S_M2:="k8s-m2"}
 echo "---${K8S_M2}---"
+
 if [ ! -d "/root/.kubeadm" ]; then
   mkdir "/root/.kubeadm"
 fi
