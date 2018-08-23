@@ -15,7 +15,7 @@ spec:
         node-role.kubernetes.io/master: ""
       containers:
       - name: grafana
-        image: devops-reg.io/k8s/heapster-grafana-amd64:v5.0.4
+        image: k8s.gcr.io/heapster-grafana-amd64:v5.0.4
         ports:
         - containerPort: 3000
           protocol: TCP
