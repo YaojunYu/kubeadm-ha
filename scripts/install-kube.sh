@@ -21,6 +21,6 @@ for NODE in ${NODES}; do
   scp /etc/yum.repos.d/kubernetes.repo ${NODE}:/etc/yum.repos.d/kubernetes.repo
   ssh ${NODE} "yum update -y"
   ssh ${NODE} "yum install -y kubelet kubeadm kubectl"
-  ssh ${NODE} "systemctl enable kubelet && systemctl start kubelet"
+  ssh ${NODE} "systemctl daemon-reload && systemctl enable kubelet && systemctl start kubelet"
   ssh ${NODE} "systemctl status kubelet"
 done

@@ -17,5 +17,5 @@ for NODE in ${NODES}; do
   ssh ${NODE} "firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 1 -i docker0 -j ACCEPT -m comment --comment 'kube-proxy redirects'"
   ssh ${NODE} "firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 1 -o docker0 -j ACCEPT -m comment --comment 'docker subnet'"
   ssh ${NODE} "firewall-cmd --reload && firewall-cmd --direct --get-all-rules"
-  ssh ${NODE} "systemctl restart firewalld && systemctl status firewalld"
+  ssh ${NODE} "systemctl daemon-reload &&  systemctl restart firewalld && systemctl status firewalld"
 done

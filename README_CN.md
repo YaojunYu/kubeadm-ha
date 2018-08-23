@@ -482,7 +482,7 @@ kubeadm init --config kubeadm-config.yaml
 cat <<EOF >> ~/.bashrc
 export KUBECONFIG=/etc/kubernetes/admin.conf
 EOF
-
+source ~/.bashrc
 # 检查kubernetes状态，等待服务正常起来
 kubectl get pods --all-namespaces -o wide -w
 ```

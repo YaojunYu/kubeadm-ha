@@ -3,42 +3,19 @@
 
 set -eu
 
-if [ ! -d "/root/.kubeadm" ]; then
-  mkdir "/root/.kubeadm"
-fi
+sh kubeadm-init.sh
 
-cat <<EOF > /root/.kubeadm/kubeadm-config.yaml
-apiVersion: kubeadm.k8s.io/v1alpha2
-kind: MasterConfiguration
-kubernetesVersion: v1.11.2
-apiServerCertSANs:
-- k8s-m1
-- k8s-m2
-- k8s-m3
-- k8s-m-lb
-- 10.128.0.2
-- 10.128.0.3
-- 10.142.0.2
-- 10.128.0.4
-#api:
-#  controlPlaneEndpoint: "10.128.0.4:6443"
-etcd:
-  local:
-    extraArgs:
-      listen-client-urls: "https://127.0.0.1:2379,https://10.128.0.2:2379"
-      advertise-client-urls: "https://10.128.0.2:2379"
-      listen-peer-urls: "https://10.128.0.2:2380"
-      initial-advertise-peer-urls: "https://10.128.0.2:2380"
-      initial-cluster: "k8s-m1=https://10.128.0.2:2380"
-    serverCertSANs:
-      - k8s-m1
-      - 10.128.0.2
-    peerCertSANs:
-      - k8s-m1
-      - 10.128.0.2
-networking:
-  # This CIDR is a Calico default. Substitute or remove for your CNI provider.
-  podSubnet: "192.168.0.0/16"
-EOF
-
-kubeadm init --config /root/.kubeadm/kubeadm-config.yaml
+echo "===copy certs to other masters==="
+: ${NODES:="k8s-m2 k8s-m3"}
+for NODE in ${NODES}; do
+  echo "---${NODE}---"
+  scp /etc/kubernetes/pki/ca.crt ${NODE}:/etc/kubernetes/pki/ca.crt
+  scp /etc/kubernetes/pki/ca.key ${NODE}:/etc/kubernetes/pki/ca.key
+  scp /etc/kubernetes/pki/sa.key ${NODE}:/etc/kubernetes/pki/sa.key
+  scp /etc/kubernetes/pki/sa.pub ${NODE}:/etc/kubernetes/pki/sa.pub
+  scp /etc/kubernetes/pki/front-proxy-ca.crt ${NODE}:/etc/kubernetes/pki/front-proxy-ca.crt
+  scp /etc/kubernetes/pki/front-proxy-ca.key ${NODE}:/etc/kubernetes/pki/front-proxy-ca.key
+  scp /etc/kubernetes/pki/etcd/ca.crt ${NODE}:/etc/kubernetes/pki/etcd/ca.crt
+  scp /etc/kubernetes/pki/etcd/ca.key ${NODE}:/etc/kubernetes/pki/etcd/ca.key
+  scp /etc/kubernetes/admin.conf ${NODE}:/etc/kubernetes/admin.conf
+done
