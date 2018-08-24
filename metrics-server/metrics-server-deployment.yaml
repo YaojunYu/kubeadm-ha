@@ -23,10 +23,10 @@ spec:
         k8s-app: metrics-server
     spec:
       volumes:
-      - name: timezone
-        hostPath:
-          path: /etc/timezone
-          type: File
+      # - name: timezone
+      #   hostPath:
+      #     path: /etc/timezone
+      #     type: File
       - name: localtime
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai
@@ -43,7 +43,7 @@ spec:
         - --source=kubernetes.summary_api:https://kubernetes.default?kubeletHttps=true&kubeletPort=10250&insecure=true
         - --metric-resolution=30s
         volumeMounts:
-        - name: timezone
-          mountPath: "/etc/timezone"
+        # - name: timezone
+        #   mountPath: "/etc/timezone"
         - name: localtime
           mountPath: "/etc/localtime"

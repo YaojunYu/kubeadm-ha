@@ -35,10 +35,10 @@ spec:
         name: traefik-ingress-lb
     spec:
       volumes:
-      - name: timezone
-        hostPath:
-          path: /etc/timezone
-          type: File
+      # - name: timezone
+      #   hostPath:
+      #     path: /etc/timezone
+      #     type: File
       - name: localtime
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai
@@ -65,8 +65,8 @@ spec:
           containerPort: 8080
           hostPort: 8080
         volumeMounts:
-        - name: timezone
-          mountPath: "/etc/timezone"
+        # - name: timezone
+        #   mountPath: "/etc/timezone"
         - name: localtime
           mountPath: "/etc/localtime"
         - mountPath: "/ssl"

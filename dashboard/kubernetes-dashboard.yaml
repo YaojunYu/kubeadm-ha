@@ -127,8 +127,6 @@ spec:
           # to it. Uncomment only if the default does not work.
           # - --apiserver-host=http://my-address:port
         volumeMounts:
-        - name: timezone
-          mountPath: "/etc/timezone"
         - name: localtime
           mountPath: "/etc/localtime"
         - name: kubernetes-dashboard-certs
@@ -149,10 +147,6 @@ spec:
           secretName: kubernetes-dashboard-certs
       - name: tmp-volume
         emptyDir: {}
-      - name: timezone
-        hostPath:
-          path: /etc/timezone
-          type: File
       - name: localtime
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai

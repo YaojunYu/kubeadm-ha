@@ -19,18 +19,18 @@ spec:
         volumeMounts:
         # - mountPath: /data
         #   name: influxdb-storage
-        - name: timezone
-          mountPath: "/etc/timezone"
+        # - name: timezone
+        #   mountPath: "/etc/timezone"
         - name: localtime
           mountPath: "/etc/localtime"
         - name: kube-system-pvc
           mountPath: /data
           subPath: heapster-influxdb
       volumes:
-      - name: timezone
-        hostPath:
-          path: /etc/timezone
-          type: File
+      # - name: timezone
+      #   hostPath:
+      #     path: /etc/timezone
+      #     type: File
       - name: localtime
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai
