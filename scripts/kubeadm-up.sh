@@ -3,12 +3,12 @@
 
 set -eu
 
-sh create-config.sh
+sh ../create-config.sh
 echo "===copy config to masters==="
 for NODE in ${NODES}; do
   echo "---${NODE}---"
   ssh ${NODE} "mkdir -p /root/.kubeadm/"
-  scp config/${NODE}/kube-config.yaml ${NODE}:/root/.kubeadm/kubeadm-config.yaml
+  scp ../config/${NODE}/kubeadm-config.yaml ${NODE}:/root/.kubeadm/kubeadm-config.yaml
 done
 
 sh kubeadm-init.sh
