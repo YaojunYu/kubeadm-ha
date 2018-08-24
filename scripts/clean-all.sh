@@ -1,7 +1,7 @@
 #!/bin/sh
 # auther: york
 
-set -eu
+set -u
 
 : ${NODES:="k8s-m1 k8s-m2 k8s-m3 k8s-n1"}
 for NODE in ${NODES}; do
