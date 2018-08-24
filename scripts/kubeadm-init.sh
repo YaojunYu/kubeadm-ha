@@ -12,6 +12,7 @@ for NODE in ${NODES}; do
   ssh ${NODE} "mkdir -p /root/.kubeadm/"
   scp config/${NODE}/kubeadm-config.yaml ${NODE}:/root/.kubeadm/kubeadm-config.yaml
 done
+systemctl start docker
 kubeadm init --config config/k8s-m1/kubeadm-config.yaml
 
 export KUBECONFIG=/etc/kubernetes/admin.conf

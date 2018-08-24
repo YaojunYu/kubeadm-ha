@@ -2,6 +2,7 @@
 # auther: york
 
 set -eu
+systemctl start docker
 
 export KUBEADM_CONFIG=/root/.kubeadm/kubeadm-config.yaml
 
