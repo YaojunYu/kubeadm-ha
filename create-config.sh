@@ -8,25 +8,25 @@
 export K8SHA_VIP=192.168.60.79
 
 # master01 ip address
-export K8SHA_IP1=192.168.60.72
+export K8SHA_IP1=10.128.0.2
 
 # master02 ip address
-export K8SHA_IP2=192.168.60.77
+export K8SHA_IP2=10.128.0.3
 
 # master03 ip address
-export K8SHA_IP3=192.168.60.78
+export K8SHA_IP3=10.142.0.2
 
 # master keepalived virtual ip hostname
-export K8SHA_VHOST=k8s-master-lb
+export K8SHA_VHOST=k8s-m-lb
 
 # master01 hostname
-export K8SHA_HOST1=k8s-master01
+export K8SHA_HOST1=k8s-m1
 
 # master02 hostname
-export K8SHA_HOST2=k8s-master02
+export K8SHA_HOST2=k8s-m2
 
 # master03 hostname
-export K8SHA_HOST3=k8s-master03
+export K8SHA_HOST3=k8s-m3
 
 # master01 network interface name
 export K8SHA_NETINF1=nm-bond
@@ -43,8 +43,8 @@ export K8SHA_KEEPALIVED_AUTH=412f7dc3bfed32194d1600c483e10ad1d
 # calico reachable ip address
 export K8SHA_CALICO_REACHABLE_IP=192.168.60.1
 
-# kubernetes CIDR pod subnet, if CIDR pod subnet is "172.168.0.0/16" please set to "172.168.0.0"
-export K8SHA_CIDR=172.168.0.0
+# kubernetes CIDR pod subnet, if CIDR pod subnet is "192.168.0.0/16" please set to "192.168.0.0"
+export K8SHA_CIDR=192.168.0.0
 
 ##############################
 # please do not modify anything below
@@ -59,7 +59,7 @@ mkdir -p config/$K8SHA_HOST3/{keepalived,nginx-lb}
 cat << EOF > config/$K8SHA_HOST1/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
-kubernetesVersion: v1.11.1
+kubernetesVersion: v1.11.2
 apiServerCertSANs:
 - ${K8SHA_HOST1}
 - ${K8SHA_HOST2}
@@ -91,7 +91,7 @@ EOF
 cat << EOF > config/$K8SHA_HOST2/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
-kubernetesVersion: v1.11.1
+kubernetesVersion: v1.11.2
 apiServerCertSANs:
 - ${K8SHA_HOST1}
 - ${K8SHA_HOST2}
@@ -124,7 +124,7 @@ EOF
 cat << EOF > config/$K8SHA_HOST3/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
-kubernetesVersion: v1.11.1
+kubernetesVersion: v1.11.2
 apiServerCertSANs:
 - ${K8SHA_HOST1}
 - ${K8SHA_HOST2}

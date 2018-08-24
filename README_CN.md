@@ -437,6 +437,7 @@ mkdir -p /etc/kubernetes/pki/etcd/
 
 # k8s-master01
 ```cat << EOF > /root/kubeadm-config.yaml
+cat << EOF > /root/kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
 kubernetesVersion: v1.11.1
@@ -467,7 +468,7 @@ etcd:
       - 192.168.60.72
 networking:
   # This CIDR is a Calico default. Substitute or remove for your CNI provider.
-  podSubnet: "172.168.0.0/16"
+  podSubnet: "192.168.0.0/16"
 EOF
 
 kubeadm init --config kubeadm-config.yaml
