@@ -11,7 +11,8 @@ sleep 120
 echo "===install other masters==="
 sh kubeadm-ha.sh
 
-kubectl taint nodes --all node-role.kubernetes.io/master-
+echo "===install addons on masters==="
+sh kubeadm-addons.sh
 
 echo "===join all nodes==="
 sh kubeadm-join.sh

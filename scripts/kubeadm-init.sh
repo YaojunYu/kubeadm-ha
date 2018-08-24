@@ -19,5 +19,6 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 echo "===install calico==="
 kubectl apply -f calico/
 
+
 cd ./scripts
 

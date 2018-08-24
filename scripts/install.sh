@@ -38,6 +38,8 @@ echo ""
 echo "===kubeadm set up==="
 sh kubeadm-up.sh
 
+kubectl get all --all-namespaces -o wide
+
 
 
 
