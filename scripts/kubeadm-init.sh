@@ -17,7 +17,7 @@ kubeadm init --config config/k8s-m1/kubeadm-config.yaml
 
 export KUBECONFIG=/etc/kubernetes/admin.conf
 echo "===install calico==="
-kubectl apply calico/
+kubectl apply -f calico/
 
 cd ./scripts
 
