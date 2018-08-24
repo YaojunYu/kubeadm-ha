@@ -42,3 +42,8 @@ networking:
 EOF
 
 kubeadm init --config /root/.kubeadm/kubeadm-config.yaml
+
+cat <<EOF >> ~/.bashrc
+export KUBECONFIG=/etc/kubernetes/admin.conf
+EOF
+source ~/.bashrc

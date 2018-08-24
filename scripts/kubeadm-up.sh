@@ -3,6 +3,14 @@
 
 set -eu
 
+sh create-config.sh
+echo "===copy config to masters==="
+for NODE in ${NODES}; do
+  echo "---${NODE}---"
+  ssh ${NODE} "mkdir -p /root/.kubeadm/"
+  scp config/${NODE}/kube-config.yaml ${NODE}:/root/.kubeadm/kubeadm-config.yaml
+done
+
 sh kubeadm-init.sh
 
 echo "===copy certs to other masters==="
@@ -30,5 +38,3 @@ sh kubeadm-ha.sh
 kubectl taint nodes --all node-role.kubernetes.io/master-
 
 echo "===install calico==="
-kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
-kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
