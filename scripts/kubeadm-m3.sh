@@ -23,8 +23,7 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 kubectl exec -n kube-system etcd-${CP0_HOSTNAME} -- etcdctl --ca-file /etc/kubernetes/pki/etcd/ca.crt --cert-file /etc/kubernetes/pki/etcd/peer.crt --key-file /etc/kubernetes/pki/etcd/peer.key --endpoints=https://${CP0_IP}:2379 member add ${CP2_HOSTNAME} https://${CP2_IP}:2380
 kubeadm alpha phase etcd local --config ${KUBEADM_CONFIG}
 
+rm -rf /etc/kubernetes/admin.conf
 kubeadm alpha phase kubeconfig all --config ${KUBEADM_CONFIG}
 kubeadm alpha phase controlplane all --config ${KUBEADM_CONFIG}
 kubeadm alpha phase mark-master --config ${KUBEADM_CONFIG}
-
-sed -i "s/10.128.0.2:6443/10.142.0.2:6443/g" /etc/kubernetes/admin.conf
