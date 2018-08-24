@@ -12,3 +12,6 @@ echo "===install other masters==="
 sh kubeadm-ha.sh
 
 kubectl taint nodes --all node-role.kubernetes.io/master-
+
+echo "===join all nodes==="
+sh kubeadm-join.sh
