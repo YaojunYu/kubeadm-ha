@@ -27,4 +27,3 @@ kubeadm alpha phase controlplane all --config ${KUBEADM_CONFIG}
 kubeadm alpha phase mark-master --config ${KUBEADM_CONFIG}
 
 sed -i "s/10.128.0.2:6443/10.128.0.3:6443/g" /etc/kubernetes/admin.conf
-
