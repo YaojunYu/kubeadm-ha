@@ -10,6 +10,6 @@ CERT_HASH=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -p
 for NODE in ${NODES}; do
   echo "---${NODE}---"
   echo "token:{${TOKEN}}"
-  echo "cert-hash{sha256:${FINGERPRT}}"
-  ssh ${NODE} "kubeadm join 10.128.0.2:6443 --token ${TOKEN} --discovery-token-ca-cert-hash sha256:${FINGERPRT}"
+  echo "cert-hash{sha256:${CERT_HASH}}"
+  ssh ${NODE} "kubeadm join 10.128.0.2:6443 --token ${TOKEN} --discovery-token-ca-cert-hash sha256:${CERT_HASH}"
 done
