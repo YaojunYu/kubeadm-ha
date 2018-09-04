@@ -8,6 +8,7 @@ for NODE in ${NODES}; do
   echo "---${NODE}---"
   ssh ${NODE} "rm -rf /root/.kubeadm"
   ssh ${NODE} "kubeadm reset -f"
+  ssh ${NODE} "systemctl daemon-reload && systemctl disable keepalived && systemctl stop keepalived"
   ssh ${NODE} "systemctl daemon-reload && systemctl disable docker && systemctl stop docker"
   ssh ${NODE} "systemctl daemon-reload && systemctl disable kubelet && systemctl stop kubelet"
   ssh ${NODE} "yum remove -y kubeadm kubelet kubectl"

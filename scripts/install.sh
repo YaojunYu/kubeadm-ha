@@ -34,10 +34,10 @@ echo "===install ipvsadm and enable ipvs_* modules==="
 export NODES="${ALL}"
 sh ipvs.sh
 
-echo ""
-echo "===install keepalived==="
-export NODES="${ALL}"
-sh install-keepalived.sh
+# echo ""
+# echo "===install keepalived==="
+# export NODES="${ALL}"
+# sh install-keepalived.sh
 
 echo ""
 echo "===kubeadm set up==="

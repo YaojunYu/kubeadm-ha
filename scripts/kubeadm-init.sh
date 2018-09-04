@@ -17,8 +17,9 @@ kubeadm init --config config/k8s-m1/kubeadm-config.yaml
 
 export KUBECONFIG=/etc/kubernetes/admin.conf
 echo "===install calico==="
-kubectl apply -f calico/
-
+# kubectl apply -f calico/
+kubectl apply -f https://docs.projectcalico.org/v3.2/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+kubectl apply -f https://docs.projectcalico.org/v3.2/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
 
 cd ./scripts
 
