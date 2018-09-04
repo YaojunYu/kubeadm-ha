@@ -3,7 +3,7 @@
 
 set -eu
 
-: ${NODES:="k8s-m1 k8s-m2 k8s-m3"}
+: ${NODES:="k8s-m1 k8s-m2 k8s-m3 k8s-n1"}
 
 for NODE in ${NODES}; do
   echo "---${NODE}---"
