@@ -31,7 +31,7 @@ sh install-kube.sh
 
 echo ""
 echo "===install keepalived==="
-export NODES="${MASTERS}"
+export NODES="${ALL}"
 sh install-keepalived.sh
 
 echo ""
