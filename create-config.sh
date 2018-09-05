@@ -5,7 +5,7 @@
 #######################################
 
 # master keepalived virtual ip address
-export K8SHA_VIP=192.168.60.79
+export K8SHA_VIP=192.168.0.1
 
 # master01 ip address
 export K8SHA_IP1=10.128.0.2
@@ -89,6 +89,11 @@ networking:
 kubeProxy:
   config:
     mode: "ipvs"
+kubeletConfiguration:
+  baseConfig:
+    clusterDNS:
+    - 10.96.0.10
+    clusterDomain: cluster.local
 EOF
 
 cat << EOF > config/$K8SHA_HOST2/kubeadm-config.yaml
@@ -125,6 +130,11 @@ networking:
 kubeProxy:
   config:
     mode: "ipvs"
+kubeletConfiguration:
+  baseConfig:
+    clusterDNS:
+    - 10.96.0.10
+    clusterDomain: cluster.local
 EOF
 
 cat << EOF > config/$K8SHA_HOST3/kubeadm-config.yaml
@@ -161,6 +171,11 @@ networking:
 kubeProxy:
   config:
     mode: "ipvs"
+kubeletConfiguration:
+  baseConfig:
+    clusterDNS:
+    - 10.96.0.10
+    clusterDomain: cluster.local
 EOF
 
 echo "create kubeadm-config.yaml files success. config/$K8SHA_HOST1/kubeadm-config.yaml"
