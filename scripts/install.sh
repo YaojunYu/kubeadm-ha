@@ -45,6 +45,8 @@ sh kubeadm-up.sh
 
 kubectl get all --all-namespaces -o wide
 
+echo "!!!!!!!!Install Complete Succeed!"
+
 
 
 

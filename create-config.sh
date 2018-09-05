@@ -86,6 +86,9 @@ etcd:
 networking:
   # This CIDR is a Calico default. Substitute or remove for your CNI provider.
   podSubnet: "${K8SHA_CIDR}/16"
+kubeProxy:
+  config:
+    mode: "ipvs"
 EOF
 
 cat << EOF > config/$K8SHA_HOST2/kubeadm-config.yaml
@@ -119,6 +122,9 @@ etcd:
 networking:
   # This CIDR is a calico default. Substitute or remove for your CNI provider.
   podSubnet: "${K8SHA_CIDR}/16"
+kubeProxy:
+  config:
+    mode: "ipvs"
 EOF
 
 cat << EOF > config/$K8SHA_HOST3/kubeadm-config.yaml
@@ -152,6 +158,9 @@ etcd:
 networking:
   # This CIDR is a calico default. Substitute or remove for your CNI provider.
   podSubnet: "${K8SHA_CIDR}/16"
+kubeProxy:
+  config:
+    mode: "ipvs"
 EOF
 
 echo "create kubeadm-config.yaml files success. config/$K8SHA_HOST1/kubeadm-config.yaml"
