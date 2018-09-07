@@ -14,6 +14,14 @@ echo "===install heapster==="
 kubectl apply -f heapster/
 echo "===install dashboard==="
 kubectl apply -f dashboard/
+echo "===install traefik==="
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=k8s-master-lb"
+kubectl -n kube-system create secret generic traefik-cert --from-file=tls.key --from-file=tls.crt
+kubectl apply -f traefik/
+echo "===install istio==="
+kubectl apply -f istio/
+echo "===install prometheus==="
+kubectl apply -f prometheus/
 
 kubectl get all --all-namespaces -o wide
 
