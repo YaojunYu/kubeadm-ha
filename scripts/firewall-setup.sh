@@ -3,7 +3,7 @@
 
 set -eu
 
-: ${NODES:="k8s-m1 k8s-m2 k8s-m3"}
+: ${NODES:="k8s-m1 k8s-m2 k8s-m3 k8s-n1"}
 : ${PORTS:="16443 6443 4001 2379-2380 10250 10251 10252 10255 30000-32767"}
 
 for NODE in ${NODES}; do
