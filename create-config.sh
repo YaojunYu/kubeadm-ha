@@ -88,7 +88,7 @@ networking:
   podSubnet: "${K8SHA_CIDR}/16"
 kubeProxy:
   config:
-    mode: "ipvs"
+    mode: "iptables"
 kubeletConfiguration:
   baseConfig:
     clusterDNS:
@@ -129,7 +129,7 @@ networking:
   podSubnet: "${K8SHA_CIDR}/16"
 kubeProxy:
   config:
-    mode: "ipvs"
+    mode: "iptables"
 kubeletConfiguration:
   baseConfig:
     clusterDNS:
@@ -170,7 +170,7 @@ networking:
   podSubnet: "${K8SHA_CIDR}/16"
 kubeProxy:
   config:
-    mode: "ipvs"
+    mode: "iptables"
 kubeletConfiguration:
   baseConfig:
     clusterDNS:
