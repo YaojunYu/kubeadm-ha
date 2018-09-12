@@ -1,0 +1,29 @@
+/**
+ * This pipeline will execute a simple Maven build using a pod template in yaml
+ */
+
+podTemplate(label: 'maven', yaml: """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    build: java-maven
+spec:
+  containers:
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+    command:
+    - cat
+    tty: true
+"""
+  ) {
+
+  node('maven') {
+    stage('Build') {
+      git credentialsId: '332dda6b-e84e-4e6c-b8cd-7a1d342c9bb0', url: 'https://gitee.com/binggoyu/yao-express-server.git'
+      container('maven') {
+          sh 'mvn -B -e -U clean install -f service-user/pom.xml'
+      }
+    }
+  }
+}

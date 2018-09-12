@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nexus3-ingress
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: "600M"
+#    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+spec:
+  rules:
+  - host: repo.yaosuyun.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nexus3
+          servicePort: 80
+#  - host: k8s.yaosuyun.com
+#    http:
+#      paths:
+#      - path: /
+#        backend:
+#          serviceName: kubernetes-dashboard
+#          servicePort: 443
+#  tls:
+#  - hosts:
+#    - www.yaosuyun.com
+#    secretName: ingress-tls-cert-secret

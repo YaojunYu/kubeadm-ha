@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: maven
+spec:
+  containers:
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+#    volumeMounts:
+#    - name: repo-dir
+#      mountPath: /root/.m2
+    command:
+      - cat
+#  volumes:
+#  - name: repo-dir
+#    hostPath: 
+#      path: /data/maven/.m2
